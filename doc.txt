@@ -1,0 +1,23 @@
+# ====== HƯỚNG DẪN KHAI THÁC CÁC LỖ HỔNG ======
+
+"""
+LỖ HỔNG 1: SQL INJECTION
+- Cách khai thác: Trong form đăng nhập, thử username: admin' OR '1'='1' --
+- Hoặc: admin'; DROP TABLE users; --
+- Nguyên nhân: Sử dụng string formatting thay vì parameterized queries
+
+LỖ HỔNG 2: WEAK PASSWORD & PLAIN TEXT STORAGE  
+- Mật khẩu chỉ cần tối thiểu 3 ký tự
+- Mật khẩu được lưu dưới dạng plain text (xem tại /debug/users)
+- Nguyên nhân: Không hash password, policy yếu
+
+LỖ HỔNG 3: INSECURE DIRECT OBJECT REFERENCE (IDOR)
+- Thay đổi URL: /dashboard?user_id=2 để xem sản phẩm của user khác
+- Sửa/xóa sản phẩm của người khác bằng cách thay product_id trong URL
+- Nguyên nhân: Không kiểm tra quyền sở hữu tài nguyên
+
+CÁCH SỬA:
+1. Dùng parameterized queries cho SQL
+2. Hash password với bcrypt/scrypt, policy mạnh hơn  
+3. Kiểm tra user_id trong session với owner của tài nguyên
+"""

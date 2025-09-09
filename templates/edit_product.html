@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>Sửa sản phẩm</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Tên sản phẩm:</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ product[1] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Giá (VND):</label>
+                        <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ product[2] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Mô tả:</label>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ product[3] }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Cập nhật</button>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Hủy</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
